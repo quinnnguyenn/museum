@@ -1,13 +1,14 @@
 .columns {
     display: flex;
     padding: 25px;
+    gap: 10px;
 }
 
 .columns section {
     flex: 1;
     border: 1px;
     border-radius: 5px;
-    gap: 10px;
+    background-color: white;
 }
 
 body {
