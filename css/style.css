@@ -16,6 +16,14 @@ header {
     border-radius: 5px;
     background-color: white;
     padding: 10px;
+    margin: 10px;
+}
+
+footer {
+    border-radius: 5px;
+    background-color: white;
+    padding: 10px;
+    margin: 10px;
 }
 
 body {
