@@ -10,7 +10,7 @@
     border-radius: 5px;
     background-color: white;
     padding: 10px;
-    opacity: 70;
+    opacity: 80%;
 }
 
 header {
@@ -30,7 +30,7 @@ footer {
     background-color: white;
     padding: 10px;
     margin: 10px;
-    opacity: 20%;
+    opacity: 80%;
 }
 
 body {
@@ -38,6 +38,7 @@ body {
 }
 
 h1 {
+    flex: 1;
     font-family: 'Lucida Sans Unicode';
     align-items: center;
 }
