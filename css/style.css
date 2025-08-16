@@ -10,6 +10,7 @@
     border-radius: 5px;
     background-color: white;
     padding: 10px;
+    opacity: 40%;
 }
 
 header {
@@ -17,7 +18,6 @@ header {
     background-color: rgb(164, 153, 153);
     padding: 10px;
     margin: 10px;
-    opacity: 50%;
 }
 
 section {
@@ -25,6 +25,7 @@ section {
     background-color: white;
     padding: 10px;
     margin: 10px;
+    opacity: 40%;
 }
 footer {
     border-radius: 5px;
@@ -32,6 +33,7 @@ footer {
     background:
     padding: 10px;
     margin: 10px;
+    opacity: 40%;
 }
 
 body {
