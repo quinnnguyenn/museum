@@ -11,6 +11,12 @@
     background-color: white;
 }
 
+header {
+    border: 1px;
+    border-radius: 5px;
+    background-color: white;
+}
+
 body {
     background-image: url(../images/museumBackground.png);
 }
