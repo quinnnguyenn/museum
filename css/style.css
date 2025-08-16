@@ -14,11 +14,17 @@
 
 header {
     border-radius: 5px;
-    background-color: rgb(216, 161, 161);
+    background-color: rgb(164, 153, 153);
     padding: 10px;
     margin: 10px;
 }
 
+section {
+    border-radius: 5px;
+    background-color: white;
+    padding: 10px;
+    margin: 10px;
+}
 footer {
     border-radius: 5px;
     background-color: white;
