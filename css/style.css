@@ -9,12 +9,13 @@
     border: 1px;
     border-radius: 5px;
     background-color: white;
+    padding: 10px;
 }
 
 header {
-    border: 1px;
     border-radius: 5px;
     background-color: white;
+    padding: 10px;
 }
 
 body {
