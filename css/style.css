@@ -14,7 +14,7 @@
 }
 
 header {
-    background-color: rgb(164, 153, 153);
+    background-color: rgb(95, 133, 100);
     padding: 10px;
 }
 
@@ -52,6 +52,6 @@ p {
 }
 
 button {
-    background-color: rgb(193, 183, 183);
+    background-color: rgb(130, 166, 134);
     align-items: center;
 }
