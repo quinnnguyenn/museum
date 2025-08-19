@@ -1,6 +1,7 @@
 header {
     background-color: rgb(95, 133, 100);
     padding: 10px;
+    text-align: center;
 }
 
 section {
@@ -15,5 +16,13 @@ body {
 }
 button {
     background-color: rgb(130, 166, 134);
-    align-items: center;
+}
+
+h1 {
+    flex: 1;
+    font-family: 'Lucida Sans Unicode';
+}
+
+p {
+     font-family: 'Lucida Sans Unicode';
 }

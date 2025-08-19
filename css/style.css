@@ -16,6 +16,7 @@
 header {
     background-color: rgb(95, 133, 100);
     padding: 10px;
+    text-align: center;
 }
 
 section {
@@ -40,7 +41,6 @@ body {
 h1 {
     flex: 1;
     font-family: 'Lucida Sans Unicode';
-    align-items: center;
 }
 
 h2 {
@@ -53,5 +53,4 @@ p {
 
 button {
     background-color: rgb(130, 166, 134);
-    align-items: center;
 }
