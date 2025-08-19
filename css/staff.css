@@ -1,0 +1,19 @@
+header {
+    background-color: rgb(95, 133, 100);
+    padding: 10px;
+}
+
+section {
+    border-radius: 5px;
+    background-color: white;
+    padding: 10px;
+    margin: 10px;
+    opacity: 85%;
+}
+body {
+    background-image: url(../images/museumBackground.png);
+}
+button {
+    background-color: rgb(130, 166, 134);
+    align-items: center;
+}
