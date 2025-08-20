@@ -1,3 +1,18 @@
+.staff-persona {
+    display: flex;
+    align-items: flex-start;
+}
+
+.staff-persona.left {
+    flex-direction: row;
+}
+
+.staff-persona.right {
+    flex-direction: row;
+}
+
+
+
 header {
     background-color: rgb(95, 133, 100);
     padding: 10px;
