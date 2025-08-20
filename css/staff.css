@@ -1,12 +1,14 @@
 .staff-persona {
     display: flex;
     align-items: flex-start;
-    
-}
+    flex-direction: column;
 
+}
 
 .staff.persona .bio {
   flex: 1;
+  width: 60%;
+
 }
 
 .staff-persona.left {
@@ -15,6 +17,10 @@
 
 .staff-persona.right {
     flex-direction: row;
+}
+
+.staff-profile .image {
+  width: 40%;
 }
 
 
