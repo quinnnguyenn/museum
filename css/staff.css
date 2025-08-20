@@ -55,3 +55,10 @@ ul {
 li {
     font-family: 'Lucida Sans Unicode';
 }
+
+footer {
+    border-radius: 5px;
+    background-color: white;
+    padding: 10px;
+    margin: 10px;
+}
