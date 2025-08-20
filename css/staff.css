@@ -2,13 +2,6 @@
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-
-}
-
-.staff.persona .bio {
-  flex: 1;
-  width: 60%;
-
 }
 
 .staff-persona.left {
@@ -16,15 +9,16 @@
 }
 
 .staff-persona.right {
-    flex-direction: row;
+    flex-direction: row-reverse;
 }
 
 .staff-profile .image {
   width: 40%;
 }
 
-
-
+.staff.persona .bio {
+  width: 60%;
+}
 
 header {
     background-color: rgb(95, 133, 100);
