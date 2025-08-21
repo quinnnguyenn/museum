@@ -1,0 +1,11 @@
+header {
+    background-color: rgb(95, 133, 100);
+    padding: 10px;
+    text-align: center;
+}
+body {
+    background-image: url(../images/museumBackground.png);
+}
+button {
+    background-color: rgb(130, 166, 134);
+}
