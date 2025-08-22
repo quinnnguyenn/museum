@@ -64,8 +64,8 @@ h2 strong {
     margin: 0;
 }
 
-.artifact-header {
-  width: 100%;
+.artifact-img-block {
+  flex: 1 1 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
