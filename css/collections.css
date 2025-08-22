@@ -33,11 +33,12 @@ h2 strong {
     margin: 0;
 }
 
-.collection-section {
-    background-color: white;
-    padding: 10px;
-    border-radius: 5px;
+.artifact {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
 }
+
 
 footer {
     border-radius: 5px;
