@@ -4,6 +4,10 @@ header {
     text-align: center;
 }
 
+h2 {
+    font-weight: bold;
+}
+
 body {
     background-color: rgb(242, 227, 232);
     font-family: 'Lucida Sans Unicode';
