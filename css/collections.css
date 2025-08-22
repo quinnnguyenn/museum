@@ -8,8 +8,9 @@ body {
 }
 button {
     background-color: rgb(237, 192, 207);
-      margin: 0.5em;
-  padding: 0.5em 1em;
+    margin: 0.5em;
+    padding: 0.5em 1em;
+    align-items: center;
 }
 
 .field-group {
