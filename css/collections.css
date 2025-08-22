@@ -20,6 +20,10 @@ button {
     justify-content: center;
 }
 
+.divider {
+    width: 90%;
+}
+
 h2 strong {
     font-weight: bold;
 }
