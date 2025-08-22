@@ -68,7 +68,7 @@ h2 strong {
   flex: 1 1 300px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 footer {
