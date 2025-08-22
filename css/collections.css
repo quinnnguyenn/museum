@@ -5,6 +5,7 @@ header {
 }
 body {
     background-image: url(../images/museumBackground.png);
+    font-family: 'Lucida Sans Unicode';
 }
 button {
     background-color: rgb(237, 192, 207);
@@ -30,4 +31,9 @@ h2 strong {
 .field-group p {
     flex: 1 1 calc(33.333% - 16px);
     margin: 0;
+}
+
+.collection-section {
+    background-color: white;
+    padding: 10px;
 }
