@@ -34,10 +34,34 @@ h2 strong {
 }
 
 .artifact {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  margin-bottom: 30px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+}
+
+.artifact-img {
+    flex: 1 1 300px;
+    max-width: 500px;
+    height: auto;
+    object-fit: cover;
+    align-self: center;
+}
+
+.artifact .field-group {
+    flex: 2 1 600px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.artifact .field-group p {
+    flex: 1 1 calc(33.333% - 16px);
+    margin: 0;
 }
 
 
