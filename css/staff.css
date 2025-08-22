@@ -4,6 +4,15 @@
     flex-direction: column;
 }
 
+.image {
+    text-align: center;
+}
+.image img {
+    max-width: 100%;
+    height: auto;
+}
+
+
 .staff-persona.left {
     flex-direction: row;
 }
