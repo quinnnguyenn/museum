@@ -36,4 +36,12 @@ h2 strong {
 .collection-section {
     background-color: white;
     padding: 10px;
+    border-radius: 5px;
+}
+
+footer {
+    border-radius: 5px;
+    background-color: white;
+    padding: 10px;
+    margin: 20px;
 }
