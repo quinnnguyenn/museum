@@ -13,17 +13,21 @@ button {
 }
 
 .submenu {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
+}
+
+h2 strong {
+    font-weight: bold;
 }
 
 .field-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-}
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
 
 .field-group p {
-  flex: 1 1 calc(33.333% - 16px);
-  margin: 0;
+    flex: 1 1 calc(33.333% - 16px);
+    margin: 0;
 }
