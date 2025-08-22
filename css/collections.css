@@ -15,10 +15,10 @@ button {
 .field-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 15px;
 }
 
 .field-group p {
-  flex: 1 1 calc(33.333% - 1rem);
+  flex: 1 1 calc(33.333% - 16px);
   margin: 0;
 }
