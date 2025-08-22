@@ -15,18 +15,35 @@
 
 .staff-persona.left {
     flex-direction: row;
+    align-items: center;
+    gap: 20px;
+
 }
 
 .staff-persona.right {
     flex-direction: row-reverse;
+    align-items: center;
+    gap: 20px;
+
 }
 
 .staff-persona .image {
-  width: 40%;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
-.staff.persona .bio {
-  width: 60%;
+.staff-persona .image img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.staff-persona .bio {
+    width: 60%;
 }
 
 header {
