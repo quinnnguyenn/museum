@@ -103,3 +103,8 @@ footer {
     flex: 1 1 100%;
   }
 }
+
+.field-group,
+.field-group p {
+  outline: 1px dashed hotpink;
+}
