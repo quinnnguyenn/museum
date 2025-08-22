@@ -63,13 +63,6 @@ h2 strong {
     margin-top: 10px;
 }
 
-.artifact .field-group {
-    flex: 2 1 600px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
 .artifact .field-group p {
     flex: 1 1 calc(33.333% - 16px);
     margin: 0;
@@ -94,4 +87,19 @@ footer {
     border-radius: 5px;
     padding: 10px;
     margin: 10px;
+}
+
+@media (max-width: 768px) {
+  .artifact {
+    flex-direction: column;
+  }
+
+  .artifact-img-block,
+  .artifact-info-block {
+    flex: 1 1 100%;
+  }
+
+  .field-group p {
+    flex: 1 1 100%;
+  }
 }
