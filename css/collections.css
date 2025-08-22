@@ -30,6 +30,14 @@ h2 strong {
     gap: 15px;
 }
 
+.artifact .field-group {
+  flex: 2 1 600px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  width: 100%;
+}
+
 .field-group p {
     flex: 1 1 calc(33.333% - 16px);
     margin: 0;
@@ -62,6 +70,7 @@ h2 strong {
 .artifact .field-group p {
     flex: 1 1 calc(33.333% - 16px);
     margin: 0;
+    min-width: 200px;
 }
 
 .artifact-img-block {
