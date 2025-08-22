@@ -61,6 +61,7 @@ section {
 }
 body {
     background-image: url(../images/museumBackground.png);
+    font-family: 'Lucida Sans Unicode';
 }
 button {
     background-color: rgb(237, 192, 207);
