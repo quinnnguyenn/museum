@@ -1,140 +1,181 @@
-<script>
-const CART_KEY = 'museumCartV1';
-const MEMBER_DISCOUNT_RATE = 0.15;
-const TAX_RATE = 0.10;
-const SHIPPING_RATE = 4.99;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Quinn Nguyen">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="../css/shop.css">
+  <title>Museum of Fashion</title>
+</head>
 
-function readCart() {
-  try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
-  catch { return []; }
-}
+<body>
+  <header>
+    <h1>Museum of Fashion</h1>
+    <button onclick="location.href='../index.html'">Home</button>
+    <button onclick="location.href='staff.html'">Staff</button>
+    <button onclick="location.href='collections.html'">Collections</button>
+    <button onclick="location.href='shop.html'">Shop</button>
+  </header>
 
-function writeCart(cart) {
-  localStorage.setItem(CART_KEY, JSON.stringify(cart));
-}
+  <main>
+    <div class="controls">
+      <label><input type="checkbox" id="memberToggle"> Member Discount (15%)</label>
+    </div>
 
-function removeItem(id) {
-  const cart = readCart().map(item => {
-    if (item.id === id) item.qty = 0;
-    return item;
-  });
-  writeCart(cart);
-  render();
-}
+    <div id="emptyMsg" class="empty" hidden>Your cart is empty.</div>
+    <div id="items" hidden></div>
+    <pre id="summary" hidden></pre>
 
-function money(n) {
-  const sign = n < 0 ? -1 : 1;
-  const s = '$' + Math.abs(n).toFixed(2);
-  return sign < 0 ? '(' + s + ')' : s;
-}
+    <div class="actions">
+      <button id="clearBtn">Clear Cart</button>
+      <a href="shop.html">Keep Shopping</a>
+    </div>
+  </main>
 
-function volumeRate(total) {
-  const tiers = [
-    [0, 49.99, 0.00],
-    [50, 99.99, 0.05],
-    [100, 199.99, 0.10],
-    [200, Infinity, 0.15]
-  ];
-  for (const [min, max, rate] of tiers) {
-    if (total >= min && total <= max) return rate;
-  }
-  return 0;
-}
+  <footer>
+    <p>This is a fictitious website created purely for academic purposes. This site was conceived by a human. The content on this site was conceived by a human and created by AI. The images were created by AI and curated, edited, reviewed, verified, and augmented by a human, although AI is a much better typist than I.</p>
+  </footer>
 
-function render() {
-  const itemsDiv   = document.getElementById('items');
-  const summaryPre = document.getElementById('summary');
-  const emptyMsg   = document.getElementById('emptyMsg');
-  const isMember   = document.getElementById('memberToggle').checked;
+  <script>
+    const CART_KEY = 'museumCartV1';
+    const MEMBER_DISCOUNT_RATE = 0.15;
+    const TAX_RATE = 0.10;
+    const SHIPPING_RATE = 4.99;
 
-  const cart = readCart().filter(it => it.qty > 0 && it.unitPrice > 0);
+    function readCart() {
+      try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+      catch { return []; }
+    }
 
-  if (cart.length === 0) {
-    itemsDiv.hidden = true;
-    summaryPre.hidden = true;
-    emptyMsg.hidden = false;
-    return;
-  }
+    function writeCart(cart) {
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    }
 
-  itemsDiv.innerHTML = '';
-  itemsDiv.hidden = false;
-  emptyMsg.hidden = true;
+    function removeItem(id) {
+      const cart = readCart().map(item => {
+        if (item.id === id) item.qty = 0;
+        return item;
+      });
+      writeCart(cart);
+      render();
+    }
 
-  let subtotal = 0;
+    function money(n) {
+      const sign = n < 0 ? -1 : 1;
+      const s = '$' + Math.abs(n).toFixed(2);
+      return sign < 0 ? '(' + s + ')' : s;
+    }
 
-  cart.forEach(item => {
-    const line = document.createElement('div');
-    line.style.display = 'flex';
-    line.style.justifyContent = 'space-between';
-    line.style.alignItems = 'center';
-    line.style.marginBottom = '10px';
+    function volumeRate(total) {
+      const tiers = [
+        [0, 49.99, 0.00],
+        [50, 99.99, 0.05],
+        [100, 199.99, 0.10],
+        [200, Infinity, 0.15]
+      ];
+      for (const [min, max, rate] of tiers) {
+        if (total >= min && total <= max) return rate;
+      }
+      return 0;
+    }
 
-    const left = document.createElement('span');
-    left.textContent = `${item.qty} × ${item.name}`;
+    function render() {
+      const itemsDiv   = document.getElementById('items');
+      const summaryPre = document.getElementById('summary');
+      const emptyMsg   = document.getElementById('emptyMsg');
+      const isMember   = document.getElementById('memberToggle').checked;
 
-    const removeBtn = document.createElement('button');
-    removeBtn.textContent = 'Remove';
-    removeBtn.style.marginLeft = '10px';
-    removeBtn.onclick = () => removeItem(item.id);
+      const cart = readCart().filter(it => it.qty > 0 && it.unitPrice > 0);
 
-    const right = document.createElement('span');
-    const itemTotal = item.unitPrice * item.qty;
-    right.textContent = money(itemTotal);
-    subtotal += itemTotal;
+      if (cart.length === 0) {
+        itemsDiv.hidden = true;
+        summaryPre.hidden = true;
+        emptyMsg.hidden = false;
+        return;
+      }
 
-    const leftGroup = document.createElement('span');
-    leftGroup.appendChild(left);
-    leftGroup.appendChild(removeBtn);
+      itemsDiv.innerHTML = '';
+      itemsDiv.hidden = false;
+      emptyMsg.hidden = true;
 
-    line.appendChild(leftGroup);
-    line.appendChild(right);
-    itemsDiv.appendChild(line);
-  });
+      let subtotal = 0;
 
-  const volumeDiscountRate = volumeRate(subtotal);
-  const volumeDiscount = subtotal * volumeDiscountRate;
-  const memberDiscount = isMember ? subtotal * MEMBER_DISCOUNT_RATE : 0;
+      cart.forEach(item => {
+        const line = document.createElement('div');
+        line.style.display = 'flex';
+        line.style.justifyContent = 'space-between';
+        line.style.alignItems = 'center';
+        line.style.marginBottom = '10px';
 
-  let discountName = '';
-  let discountAmount = 0;
-  let volumeShown = 0;
-  let memberShown = 0;
+        const leftGroup = document.createElement('span');
+        leftGroup.style.display = 'flex';
+        leftGroup.style.alignItems = 'center';
 
-  if (memberDiscount > volumeDiscount) {
-    discountName = 'Member Discount';
-    discountAmount = memberDiscount;
-    memberShown = memberDiscount;
-  } else {
-    discountName = 'Volume Discount';
-    discountAmount = volumeDiscount;
-    volumeShown = volumeDiscount;
-  }
+        const left = document.createElement('span');
+        left.textContent = `${item.qty} × ${item.name}`;
 
-  const taxableSubtotal = subtotal - discountAmount;
-  const taxAmount = taxableSubtotal * TAX_RATE;
-  const invoiceTotal = taxableSubtotal + taxAmount + SHIPPING_RATE;
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = 'Remove';
+        removeBtn.style.marginLeft = '10px';
+        removeBtn.onclick = () => removeItem(item.id);
 
-  let summary = `Hello Shopper, here is your Cart Summary.\n\n`;
-  summary += `Subtotal of Items:   ${money(subtotal)}\n`;
-  summary += `Volume Discount:     -${money(volumeShown)}\n`;
-  summary += `Member Discount:     -${money(memberShown)}\n`;
-  summary += `Shipping:            ${money(SHIPPING_RATE)}\n`;
-  summary += `Subtotal (Taxable):  ${money(taxableSubtotal)}\n`;
-  summary += `Tax Rate:            ${(TAX_RATE * 100).toFixed(1)}%\n`;
-  summary += `Tax Amount:          ${money(taxAmount)}\n`;
-  summary += `------------------------------\n`;
-  summary += `Invoice Total:       ${money(invoiceTotal)}\n`;
+        leftGroup.appendChild(left);
+        leftGroup.appendChild(removeBtn);
 
-  summaryPre.textContent = summary;
-  summaryPre.hidden = false;
-}
+        const right = document.createElement('span');
+        const itemTotal = item.unitPrice * item.qty;
+        right.textContent = money(itemTotal);
+        subtotal += itemTotal;
 
-document.getElementById('memberToggle').addEventListener('change', render);
-document.getElementById('clearBtn').addEventListener('click', function() {
-  writeCart([]);
-  document.getElementById('memberToggle').checked = false;
-  render();
-});
+        line.appendChild(leftGroup);
+        line.appendChild(right);
+        itemsDiv.appendChild(line);
+      });
 
-render();
-</script>
+      const volumeDiscountRate = volumeRate(subtotal);
+      const volumeDiscount = subtotal * volumeDiscountRate;
+      const memberDiscount = isMember ? subtotal * MEMBER_DISCOUNT_RATE : 0;
+
+      let discountAmount = 0;
+      let volumeShown = 0;
+      let memberShown = 0;
+
+      if (memberDiscount > volumeDiscount) {
+        discountAmount = memberDiscount;
+        memberShown = memberDiscount;
+      } else {
+        discountAmount = volumeDiscount;
+        volumeShown = volumeDiscount;
+      }
+
+      const taxableSubtotal = subtotal - discountAmount;
+      const taxAmount = taxableSubtotal * TAX_RATE;
+      const invoiceTotal = taxableSubtotal + taxAmount + SHIPPING_RATE;
+
+      let summary = `Hello Shopper, here is your Cart Summary.\n\n`;
+      summary += `Subtotal of Items:   ${money(subtotal)}\n`;
+      summary += `Volume Discount:     -${money(volumeShown)}\n`;
+      summary += `Member Discount:     -${money(memberShown)}\n`;
+      summary += `Shipping:            ${money(SHIPPING_RATE)}\n`;
+      summary += `Subtotal (Taxable):  ${money(taxableSubtotal)}\n`;
+      summary += `Tax Rate:            ${(TAX_RATE * 100).toFixed(1)}%\n`;
+      summary += `Tax Amount:          ${money(taxAmount)}\n`;
+      summary += `------------------------------\n`;
+      summary += `Invoice Total:       ${money(invoiceTotal)}\n`;
+
+      summaryPre.textContent = summary;
+      summaryPre.hidden = false;
+    }
+
+    document.getElementById('memberToggle').addEventListener('change', render);
+    document.getElementById('clearBtn').addEventListener('click', function() {
+      writeCart([]);
+      document.getElementById('memberToggle').checked = false;
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>
