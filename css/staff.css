@@ -60,7 +60,7 @@ section {
     gap: 10px;
 }
 body {
-    background-image: url(../images/museumBackground.png);
+    background-color: rgb(242, 227, 232);
     font-family: 'Lucida Sans Unicode';
 }
 button {
