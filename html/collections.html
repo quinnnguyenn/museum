@@ -97,11 +97,15 @@
   <hr class="divider">
 <br>
 
-  <div class="artifact">
-          <div class="artifact-img-block">
+<div class="artifact">
+  <div class="artifact-img-block">
     <h2>Vietnamese Áo dài</h2>
-    <img src="../images/collections/artifact3.png" alt="Vietnamese Áo dài from 1920s Vietnam" class="artifact-img" style="width: 400px; height: 400px;"/>
-</div>
+    <img src="../images/collections/artifact3.png"
+         alt="Vietnamese Áo dài from 1920s Vietnam"
+         class="artifact-img open-modal"
+         style="width: 400px; height: 400px;"
+         data-modal-target="#modal-text-aodai" />
+  </div>
 
   <div class="artifact-info-block">
     <div class="field-group">
@@ -127,11 +131,20 @@
       <p><strong>Comparison:</strong> Similar garments archived in the Vietnam National Museum of History and Áo dài Museum in Ho Chi Minh City</p>
     </div>
   </div>
-  </div>
+</div>
 
 </section>
 
-
+<div class="modal-item" id="modal-text-aodai" hidden>
+  <h2 id="modal-title">Vietnamese Áo dài — Collection Note</h2>
+  <div>
+    <p><strong>Artifact:</strong> Vietnamese Áo dài (c. 1920)</p>
+    <p><strong>Location:</strong> Hue, Vietnam</p>
+    <p>Blush silk, hand-stitched and whisper-thin, this áo dài once traced the contours of ceremony and quiet defiance. Its tailored bodice and flowing skirt, slit at the sides, speak of grace in motion — a silhouette born of tradition and modernity entwined. Peony embroidery blooms across its surface, echoing prosperity and feminine strength in Vietnamese lore.</p>
+    <p>Discovered in a lacquered wardrobe wrapped in rice paper, the garment bears faint perfume at the collar and gentle wear at the cuffs — intimate clues of presence, not spectacle. Found with a silk scarf, a lacquered comb, and sepia-toned photographs, it gestures toward a life lived in layered meanings: national pride, personal ritual, and aesthetic restraint.</p>
+    <p><strong>Dimensions:</strong> Length: approximately 135 cm, Chest width: around 42 cm, Sleeve length: about 58 cm, Waist width: roughly 38 cm, Weight: approximately 0.8 kg.</p>
+  </div>
+</div>
 
 <section id="anthropology" class="collection-section">
                   <h1><strong>Anthropology</strong></h1>
@@ -240,6 +253,13 @@
   </div>
 
 </section>
+
+<div class="modal" id="modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-content">
+    <button class="close-modal" aria-label="Close">x</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
 
         </main>
 
