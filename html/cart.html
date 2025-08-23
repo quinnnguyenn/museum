@@ -38,75 +38,87 @@
     </footer>
 
     <script>
-      const CART_KEY = 'museumCartV1';
+function render() {
+  const itemsDiv   = document.getElementById('items');
+  const summaryPre = document.getElementById('summary');
+  const emptyMsg   = document.getElementById('emptyMsg');
+  const isMember   = document.getElementById('memberToggle').checked;
 
-      function readCart(){
-        try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
-        catch { return []; }
-      }
+  const cart = readCart().filter(it => it.qty > 0 && it.unitPrice > 0);
 
-      function writeCart(cart){
-        localStorage.setItem(CART_KEY, JSON.stringify(cart));
-      }
+  if (cart.length === 0) {
+    itemsDiv.hidden = true;
+    summaryPre.hidden = true;
+    emptyMsg.hidden = false;
+    return;
+  }
 
-      function money(n){
-        const sign = n < 0 ? -1 : 1;
-        const s = '$' + Math.abs(n).toFixed(2);
-        return sign < 0 ? '('+s+')' : s;
-      }
+  itemsDiv.innerHTML = '';
+  itemsDiv.hidden = false;
+  emptyMsg.hidden = true;
 
-      const TAX_RATE = 0.102;
-      const MEMBER_DISCOUNT_RATE = 0.15;
-      const SHIPPING_RATE = 25.00;
-      const VOLUME_TIERS = [
-        [0.00, 49.99, 0.00],
-        [50.00, 99.99, 0.05],
-        [100.00, 199.99, 0.10],
-        [200.00, Infinity, 0.15]
-      ];
+  let subtotal = 0;
 
-      function volumeRate(total){
-        for (const [min,max,rate] of VOLUME_TIERS){
-          if (total >= min && total <= max) return rate;
-        }
-        return 0;
-      }
+  cart.forEach(item => {
+    const line = document.createElement('div');
+    line.style.display = 'flex';
+    line.style.justifyContent = 'space-between';
+    line.style.alignItems = 'center';
+    line.style.marginBottom = '10px';
 
-      function removeItem(id){
-        const next = readCart().filter(it => it.id !== id);
-        writeCart(next);
-        render();
-      }
+    const left = document.createElement('span');
+    left.textContent = `${item.qty} × ${item.name}`;
 
-      function clearCart(){
-        writeCart([]);
-        document.getElementById('memberToggle').checked = false;
-        render();
-      }
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = 'Remove';
+    removeBtn.style.marginLeft = '10px';
+    removeBtn.onclick = () => removeItem(item.id);
 
-      function render(){
-        const itemsDiv   = document.getElementById('items');
-        const summaryPre = document.getElementById('summary');
-        const emptyMsg   = document.getElementById('emptyMsg');
-        const isMember   = document.getElementById('memberToggle').checked;
+    const right = document.createElement('span');
+    const itemTotal = item.unitPrice * item.qty;
+    right.textContent = money(itemTotal);
+    subtotal += itemTotal;
 
-        itemsDiv.hidden = true;
-        summaryPre.hidden = false;
-        emptyMsg.hidden = true;
-        summaryPre.textContent =
-`TODO: Implement render() per the assignment spec.
+    const leftGroup = document.createElement('span');
+    leftGroup.appendChild(left);
+    leftGroup.appendChild(removeBtn);
 
-Steps:
-1) Load cart from localStorage (readCart)
-2) If empty → show 'Your cart is empty.'
-3) Build text list of items with Remove buttons
-4) Compute totals with exactly one discount (prompt if both apply)
-5) Output a single summary block (commission-style)`;
-      }
+    line.appendChild(leftGroup);
+    line.appendChild(right);
+    itemsDiv.appendChild(line);
+  });
 
-      document.getElementById('memberToggle').addEventListener('change', render);
-      document.getElementById('clearBtn').addEventListener('click', clearCart);
-      render();
+  const volumeDiscountRate = volumeRate(subtotal);
+  const volumeDiscount = subtotal * volumeDiscountRate;
+  const memberDiscount = isMember ? subtotal * MEMBER_DISCOUNT_RATE : 0;
+
+  let discountName = '';
+  let discountAmount = 0;
+  if (memberDiscount > volumeDiscount) {
+    discountName = 'Member Discount (15%)';
+    discountAmount = memberDiscount;
+  } else if (volumeDiscount > 0) {
+    discountName = `Volume Discount (${(volumeDiscountRate * 100).toFixed(0)}%)`;
+    discountAmount = volumeDiscount;
+  }
+
+  const discountedSubtotal = subtotal - discountAmount;
+  const tax = discountedSubtotal * TAX_RATE;
+  const total = discountedSubtotal + tax + SHIPPING_RATE;
+
+  let summary = `Hello Shopper, here is your Cart Summary.\n\n`;
+  summary += `Subtotal:         ${money(subtotal)}\n`;
+  if (discountAmount > 0) {
+    summary += `${discountName}:   -${money(discountAmount)}\n`;
+  }
+  summary += `Shipping:         ${money(SHIPPING_RATE)}\n`;
+  summary += `Tax (10.2%):      ${money(tax)}\n`;
+  summary += `------------------------------\n`;
+  summary += `Total:            ${money(total)}\n`;
+
+  summaryPre.textContent = summary;
+  summaryPre.hidden = false;
+}
     </script>
   </body>
 </html>
