@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="author" content="Quinn Nguyen" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex, nofollow" />
-    <link rel="stylesheet" href="../css/shop.css" />
+    <meta charset="UTF">
+    <meta name="author" content="Quinn Nguyen">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="../css/shop.css">
     <title>Museum of Fashion</title>
   </head>
 
   <body>
     <header>
       <h1>Museum of Fashion</h1>
-        <button onclick="location.href='../index.html'">Home</button>
-        <button onclick="location.href='staff.html'">Staff</button>
-        <button onclick="location.href='collections.html'">Collections</button>
-        <button onclick="location.href='shop.html'">Shop</button>
+      <button onclick="location.href='../index.html'">Home</button>
+      <button onclick="location.href='staff.html'">Staff</button>
+      <button onclick="location.href='collections.html'">Collections</button>
+      <button onclick="location.href='shop.html'">Shop</button>
     </header>
 
-    <main role="main">
+    <main>
       <div class="shop-grid" role="list">
         <div class="shop-item" role="listitem" data-id="item001">
-          <img src="../images/collections/artifact2.png" alt="Victorian Mourning Brooch" title="Elegance in grief — a replica of Victorian sentimentality." onclick="openModal(this)" />
+          <img src="../images/collections/artifact2.png" alt="Victorian Mourning Brooch" title="Elegance in grief — a replica of Victorian sentimentality." onclick="openModal(this)">
           <h1>Victorian Mourning Brooch</h1>
           <p>A replica brooch inspired by 19th-century mourning jewelry... (Material: Resin, Location: England, Purpose: Mourning keepsake).</p>
           <p class="price">$22.00</p>
@@ -29,7 +29,7 @@
         </div>
 
         <div class="shop-item" role="listitem" data-id="item002">
-          <img src="../images/collections/artifact4.png" alt="Carnival Mask of Recife" title="Dance with the colors of Recife’s Carnival." onclick="openModal(this)" />
+          <img src="../images/collections/artifact4.png" alt="Carnival Mask of Recife" title="Dance with the colors of Recife’s Carnival." onclick="openModal(this)">
           <h1>Carnival Mask of Recife</h1>
           <p>A lightweight mask made from molded paper... (Material: Paper, Location: Brazil, Purpose: Festival wear).</p>
           <p class="price">$18.00</p>
@@ -37,7 +37,7 @@
         </div>
 
         <div class="shop-item" role="listitem" data-id="item003">
-          <img src="../images/collections/artifact7.png" alt="Tuareg Veil Pendant" title="Crafted in the spirit of desert nomads." onclick="openModal(this)" />
+          <img src="../images/collections/artifact7.png" alt="Tuareg Veil Pendant" title="Crafted in the spirit of desert nomads." onclick="openModal(this)">
           <h1>Tuareg Veil Pendant</h1>
           <p>A simplified version of the traditional Tuareg pendant... (Material: Metal, Location: Sahara, Purpose: Veil ornament).</p>
           <p class="price">$24.00</p>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="shop-item" role="listitem" data-id="item004">
-          <img src="../images/collections/artifact6.png" alt="Qashqai Tribal Earrings" title="Spirals of tradition from the Qashqai nomads." onclick="openModal(this)" />
+          <img src="../images/collections/artifact6.png" alt="Qashqai Tribal Earrings" title="Spirals of tradition from the Qashqai nomads." onclick="openModal(this)">
           <h1>Qashqai Tribal Earrings</h1>
           <p>Copper-tone earrings with stamped spiral designs... (Material: Copper, Location: Iran, Purpose: Adornment).</p>
           <p class="price">$16.00</p>
@@ -61,48 +61,39 @@
 
       <div id="modal" class="modal" hidden>
         <button class="close" onclick="closeModal()" aria-label="Close modal">&times;</button>
-        <img id="modal-img" src="" alt="" />
+        <img id="modal-img" alt="">
         <p id="modal-caption"></p>
       </div>
     </main>
 
-        <footer>
-            <p>This is a fictitious website created purely for academic purposes. This site was concieved by a human. The content on this site was concieved by a human and created by AI. The images were created by AI and curated, edited, reviewed, verified, and augmented by a human, although AI is a much better typist than I</p>
-        </footer>
+    <footer>
+      <p>This is a fictitious website created purely for academic purposes. This site was conceived by a human. The content on this site was conceived by a human and created by AI. The images were created by AI and curated, edited, reviewed, verified, and augmented by a human, although AI is a much better typist than I.</p>
+    </footer>
 
-<script>
-  const modal = document.querySelector('.modal');
-  const modalImg = document.getElementById('modal-img');
-  const modalCaption = document.getElementById('modal-caption');
-  const closeBtn = document.querySelector('.modal .close');
+    <script>
+      const modal = document.querySelector('.modal');
+      const modalImg = document.getElementById('modal-img');
+      const modalCaption = document.getElementById('modal-caption');
+      const closeBtn = document.querySelector('.modal .close');
 
-  function openModal(img) {
-  modalImg.src = img.src;
-  modalImg.alt = img.alt;
-  modalCaption.textContent = img.title || img.alt;
-  modal.removeAttribute('hidden');
-}
+      function openModal(img) {
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+        modalCaption.textContent = img.title || img.alt;
+        modal.removeAttribute('hidden');
+      }
 
-  document.querySelectorAll('.shop-item img').forEach(img => {
-    img.addEventListener('click', () => {
-      modalImg.src = img.src;
-      modalImg.alt = img.alt;
-      modalCaption.textContent = img.dataset.caption || img.alt;
-      modal.removeAttribute('hidden');
-    });
-  });
+      function closeModal() {
+        modal.setAttribute('hidden', true);
+        modalImg.src = '';
+        modalCaption.textContent = '';
+      }
 
-  function closeModal() {
-    modal.setAttribute('hidden', true);
-    modalImg.src = '';
-    modalCaption.textContent = '';
-  }
+      closeBtn.addEventListener('click', closeModal);
 
-  closeBtn.addEventListener('click', closeModal);
-
-    function addToCart(itemId) {
-    alert(`Added ${itemId} to cart`);
-  }
+      function addToCart(itemId) {
+        alert(`Added ${itemId} to cart`);
+      }
     </script>
   </body>
 </html>
