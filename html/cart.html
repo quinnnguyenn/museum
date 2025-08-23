@@ -88,33 +88,41 @@ function render() {
     itemsDiv.appendChild(line);
   });
 
+  // Compute discounts
   const volumeDiscountRate = volumeRate(subtotal);
   const volumeDiscount = subtotal * volumeDiscountRate;
   const memberDiscount = isMember ? subtotal * MEMBER_DISCOUNT_RATE : 0;
 
   let discountName = '';
   let discountAmount = 0;
+  let volumeShown = 0;
+  let memberShown = 0;
+
   if (memberDiscount > volumeDiscount) {
-    discountName = 'Member Discount (15%)';
+    discountName = 'Member Discount';
     discountAmount = memberDiscount;
-  } else if (volumeDiscount > 0) {
-    discountName = `Volume Discount (${(volumeDiscountRate * 100).toFixed(0)}%)`;
+    memberShown = memberDiscount;
+  } else {
+    discountName = 'Volume Discount';
     discountAmount = volumeDiscount;
+    volumeShown = volumeDiscount;
   }
 
-  const discountedSubtotal = subtotal - discountAmount;
-  const tax = discountedSubtotal * TAX_RATE;
-  const total = discountedSubtotal + tax + SHIPPING_RATE;
+  const taxableSubtotal = subtotal - discountAmount;
+  const taxAmount = taxableSubtotal * TAX_RATE;
+  const invoiceTotal = taxableSubtotal + taxAmount + SHIPPING_RATE;
 
+  // Build summary
   let summary = `Hello Shopper, here is your Cart Summary.\n\n`;
-  summary += `Subtotal:         ${money(subtotal)}\n`;
-  if (discountAmount > 0) {
-    summary += `${discountName}:   -${money(discountAmount)}\n`;
-  }
-  summary += `Shipping:         ${money(SHIPPING_RATE)}\n`;
-  summary += `Tax (10.2%):      ${money(tax)}\n`;
+  summary += `Subtotal of Items:   ${money(subtotal)}\n`;
+  summary += `Volume Discount:     -${money(volumeShown)}\n`;
+  summary += `Member Discount:     -${money(memberShown)}\n`;
+  summary += `Shipping:            ${money(SHIPPING_RATE)}\n`;
+  summary += `Subtotal (Taxable):  ${money(taxableSubtotal)}\n`;
+  summary += `Tax Rate:            ${(TAX_RATE * 100).toFixed(1)}%\n`;
+  summary += `Tax Amount:          ${money(taxAmount)}\n`;
   summary += `------------------------------\n`;
-  summary += `Total:            ${money(total)}\n`;
+  summary += `Invoice Total:       ${money(invoiceTotal)}\n`;
 
   summaryPre.textContent = summary;
   summaryPre.hidden = false;
