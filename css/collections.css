@@ -21,8 +21,8 @@ button {
 }
 
 .divider {
-    width: 90%;
-    color: rgb(203, 139, 160);
+  border: none;
+  border-top: 2px solid rgb(203, 139, 160);
 }
 
 h2 strong {
