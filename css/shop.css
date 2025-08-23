@@ -1,0 +1,16 @@
+header {
+    background-color: rgb(203, 139, 160);
+    padding: 10px;
+    text-align: center;
+}
+
+footer {
+    border-radius: 5px;
+    background-color: white;
+    padding: 10px;
+    margin: 10px;
+}
+
+body {
+    background-image: url(../images/museumBackground.png);
+}
