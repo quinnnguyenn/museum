@@ -248,11 +248,19 @@
         </footer>
 
         <script>
-            function showSection(section) {
-            const sections = document.querySelectorAll('.collection-section');
-            sections.forEach(s => s.style.display = 'none');
-            document.getElementById(section).style.display = 'block';
-            }
+          document.addEventListener('DOMContentLoaded', () => {
+              const sections = document.querySelectorAll('.collection-section');
+              sections.forEach(s => s.style.display = 'none');
+          });
+
+          function showSection(section) {
+              const sections = document.querySelectorAll('.collection-section');
+              sections.forEach(s => s.style.display = 'none');
+              const target = document.getElementById(section);
+              if (target) {
+                  target.style.display = 'block';
+              }
+          }
         </script>
     </body>
 </html>
