@@ -1,20 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>        
-        <meta charset="UTF-8">
-        <meta name="author" content="Quinn Nguyen">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noindex, nofollow">
-        <link rel="stylesheet" href="../css/staff.css">
-        <title>Staff</title>
-    </head>
-    <body>
-            <header>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Quinn Nguyen">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="../css/shop.css">
+    <title>Museum of Fashion</title>
+  </head>
+
+  <body>
+    <header>
       <h1>Museum of Fashion</h1>
       <button onclick="location.href='../index.html'">Home</button>
       <button onclick="location.href='staff.html'">Staff</button>
       <button onclick="location.href='collections.html'">Collections</button>
       <button onclick="location.href='shop.html'">Shop</button>
     </header>
-    </body>
+
+    <main>
+      <div class="controls">
+        <label><input type="checkbox" id="memberToggle"> Member Discount (15%)</label>
+      </div>
+
+      <div id="emptyMsg" class="empty" hidden>Your cart is empty.</div>
+      <div id="items" hidden></div>
+      <pre id="summary" hidden></pre>
+
+      <div class="actions">
+        <button id="clearBtn">Clear Cart</button>
+        <a href="shop.html">Keep Shopping</a>
+      </div>
+    </main>
+
+    <footer>
+      <p>This is a fictitious website created purely for academic purposes. This site was conceived by a human. The content on this site was conceived by a human and created by AI. The images were created by AI and curated, edited, reviewed, verified, and augmented by a human, although AI is a much better typist than I.</p>
+    </footer>
+
+    <script>
+      const CART_KEY = 'museumCartV1';
+
+      function readCart(){
+        try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+        catch { return []; }
+      }
+
+      function writeCart(cart){
+        localStorage.setItem(CART_KEY, JSON.stringify(cart));
+      }
+
+      function money(n){
+        const sign = n < 0 ? -1 : 1;
+        const s = '$' + Math.abs(n).toFixed(2);
+        return sign < 0 ? '('+s+')' : s;
+      }
+
+      const TAX_RATE = 0.102;
+      const MEMBER_DISCOUNT_RATE = 0.15;
+      const SHIPPING_RATE = 25.00;
+      const VOLUME_TIERS = [
+        [0.00, 49.99, 0.00],
+        [50.00, 99.99, 0.05],
+        [100.00, 199.99, 0.10],
+        [200.00, Infinity, 0.15]
+      ];
+
+      function volumeRate(total){
+        for (const [min,max,rate] of VOLUME_TIERS){
+          if (total >= min && total <= max) return rate;
+        }
+        return 0;
+      }
+
+      function removeItem(id){
+        const next = readCart().filter(it => it.id !== id);
+        writeCart(next);
+        render();
+      }
+
+      function clearCart(){
+        writeCart([]);
+        document.getElementById('memberToggle').checked = false;
+        render();
+      }
+
+      function render(){
+        const itemsDiv   = document.getElementById('items');
+        const summaryPre = document.getElementById('summary');
+        const emptyMsg   = document.getElementById('emptyMsg');
+        const isMember   = document.getElementById('memberToggle').checked;
+
+        itemsDiv.hidden = true;
+        summaryPre.hidden = false;
+        emptyMsg.hidden = true;
+        summaryPre.textContent =
+`TODO: Implement render() per the assignment spec.
+
+Steps:
+1) Load cart from localStorage (readCart)
+2) If empty → show 'Your cart is empty.'
+3) Build text list of items with Remove buttons
+4) Compute totals with exactly one discount (prompt if both apply)
+5) Output a single summary block (commission-style)`;
+      }
+
+      document.getElementById('memberToggle').addEventListener('change', render);
+      document.getElementById('clearBtn').addEventListener('click', clearCart);
+      render();
+    </script>
+  </body>
 </html>
