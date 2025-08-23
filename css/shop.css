@@ -138,6 +138,10 @@ footer {
   text-align: center;
 }
 
+.modal[hidden] {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .shop-grid {
     flex-direction: column;
