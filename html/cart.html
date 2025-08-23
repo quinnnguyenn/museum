@@ -38,94 +38,92 @@
     </footer>
 
     <script>
-function render() {
-  const itemsDiv   = document.getElementById('items');
-  const summaryPre = document.getElementById('summary');
-  const emptyMsg   = document.getElementById('emptyMsg');
-  const isMember   = document.getElementById('memberToggle').checked;
+        function render() {
+        const itemsDiv   = document.getElementById('items');
+        const summaryPre = document.getElementById('summary');
+        const emptyMsg   = document.getElementById('emptyMsg');
+        const isMember   = document.getElementById('memberToggle').checked;
 
-  const cart = readCart().filter(it => it.qty > 0 && it.unitPrice > 0);
+        const cart = readCart().filter(it => it.qty > 0 && it.unitPrice > 0);
 
-  if (cart.length === 0) {
-    itemsDiv.hidden = true;
-    summaryPre.hidden = true;
-    emptyMsg.hidden = false;
-    return;
-  }
+        if (cart.length === 0) {
+            itemsDiv.hidden = true;
+            summaryPre.hidden = true;
+            emptyMsg.hidden = false;
+            return;
+        }
 
-  itemsDiv.innerHTML = '';
-  itemsDiv.hidden = false;
-  emptyMsg.hidden = true;
+        itemsDiv.innerHTML = '';
+        itemsDiv.hidden = false;
+        emptyMsg.hidden = true;
 
-  let subtotal = 0;
+        let subtotal = 0;
 
-  cart.forEach(item => {
-    const line = document.createElement('div');
-    line.style.display = 'flex';
-    line.style.justifyContent = 'space-between';
-    line.style.alignItems = 'center';
-    line.style.marginBottom = '10px';
+        cart.forEach(item => {
+            const line = document.createElement('div');
+            line.style.display = 'flex';
+            line.style.justifyContent = 'space-between';
+            line.style.alignItems = 'center';
+            line.style.marginBottom = '10px';
 
-    const left = document.createElement('span');
-    left.textContent = `${item.qty} × ${item.name}`;
+            const left = document.createElement('span');
+            left.textContent = `${item.qty} × ${item.name}`;
 
-    const removeBtn = document.createElement('button');
-    removeBtn.textContent = 'Remove';
-    removeBtn.style.marginLeft = '10px';
-    removeBtn.onclick = () => removeItem(item.id);
+            const removeBtn = document.createElement('button');
+            removeBtn.textContent = 'Remove';
+            removeBtn.style.marginLeft = '10px';
+            removeBtn.onclick = () => removeItem(item.id);
 
-    const right = document.createElement('span');
-    const itemTotal = item.unitPrice * item.qty;
-    right.textContent = money(itemTotal);
-    subtotal += itemTotal;
+            const right = document.createElement('span');
+            const itemTotal = item.unitPrice * item.qty;
+            right.textContent = money(itemTotal);
+            subtotal += itemTotal;
 
-    const leftGroup = document.createElement('span');
-    leftGroup.appendChild(left);
-    leftGroup.appendChild(removeBtn);
+            const leftGroup = document.createElement('span');
+            leftGroup.appendChild(left);
+            leftGroup.appendChild(removeBtn);
 
-    line.appendChild(leftGroup);
-    line.appendChild(right);
-    itemsDiv.appendChild(line);
-  });
+            line.appendChild(leftGroup);
+            line.appendChild(right);
+            itemsDiv.appendChild(line);
+        });
 
-  // Compute discounts
-  const volumeDiscountRate = volumeRate(subtotal);
-  const volumeDiscount = subtotal * volumeDiscountRate;
-  const memberDiscount = isMember ? subtotal * MEMBER_DISCOUNT_RATE : 0;
+        const volumeDiscountRate = volumeRate(subtotal);
+        const volumeDiscount = subtotal * volumeDiscountRate;
+        const memberDiscount = isMember ? subtotal * MEMBER_DISCOUNT_RATE : 0;
 
-  let discountName = '';
-  let discountAmount = 0;
-  let volumeShown = 0;
-  let memberShown = 0;
+        let discountName = '';
+        let discountAmount = 0;
+        let volumeShown = 0;
+        let memberShown = 0;
 
-  if (memberDiscount > volumeDiscount) {
-    discountName = 'Member Discount';
-    discountAmount = memberDiscount;
-    memberShown = memberDiscount;
-  } else {
-    discountName = 'Volume Discount';
-    discountAmount = volumeDiscount;
-    volumeShown = volumeDiscount;
-  }
+        if (memberDiscount > volumeDiscount) {
+            discountName = 'Member Discount';
+            discountAmount = memberDiscount;
+            memberShown = memberDiscount;
+        } else {
+            discountName = 'Volume Discount';
+            discountAmount = volumeDiscount;
+            volumeShown = volumeDiscount;
+        }
 
-  const taxableSubtotal = subtotal - discountAmount;
-  const taxAmount = taxableSubtotal * TAX_RATE;
-  const invoiceTotal = taxableSubtotal + taxAmount + SHIPPING_RATE;
+        const taxableSubtotal = subtotal - discountAmount;
+        const taxAmount = taxableSubtotal * TAX_RATE;
+        const invoiceTotal = taxableSubtotal + taxAmount + SHIPPING_RATE;
 
-  // Build summary
-  let summary = `Hello Shopper, here is your Cart Summary.\n\n`;
-  summary += `Subtotal of Items:   ${money(subtotal)}\n`;
-  summary += `Volume Discount:     -${money(volumeShown)}\n`;
-  summary += `Member Discount:     -${money(memberShown)}\n`;
-  summary += `Shipping:            ${money(SHIPPING_RATE)}\n`;
-  summary += `Subtotal (Taxable):  ${money(taxableSubtotal)}\n`;
-  summary += `Tax Rate:            ${(TAX_RATE * 100).toFixed(1)}%\n`;
-  summary += `Tax Amount:          ${money(taxAmount)}\n`;
-  summary += `------------------------------\n`;
-  summary += `Invoice Total:       ${money(invoiceTotal)}\n`;
+        let summary = `Hello Shopper, here is your Cart Summary.\n\n`;
+        summary += `Subtotal of Items:   ${money(subtotal)}\n`;
+        summary += `Volume Discount:     -${money(volumeShown)}\n`;
+        summary += `Member Discount:     -${money(memberShown)}\n`;
+        summary += `Shipping:            ${money(SHIPPING_RATE)}\n`;
+        summary += `Subtotal (Taxable):  ${money(taxableSubtotal)}\n`;
+        summary += `Tax Rate:            ${(TAX_RATE * 100).toFixed(1)}%\n`;
+        summary += `Tax Amount:          ${money(taxAmount)}\n`;
+        summary += `------------------------------\n`;
+        summary += `Invoice Total:       ${money(invoiceTotal)}\n`;
 
-  summaryPre.textContent = summary;
-  summaryPre.hidden = false;
+        summaryPre.textContent = summary;
+        summaryPre.hidden = false;
 }
     </script>
   </body>
