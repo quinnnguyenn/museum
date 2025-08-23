@@ -1,13 +1,12 @@
-/* ====== Base Layout ====== */
 body {
   background-color: rgb(242, 227, 232);
   font-family: 'Lucida Sans Unicode';
 }
 
 header {
-  background-color: rgb(203, 139, 160);
-  padding: 10px;
-  text-align: center;
+    background-color: rgb(203, 139, 160);
+    text-align: center;
+    padding: 10px;
 }
 
 button {
