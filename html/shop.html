@@ -70,32 +70,29 @@
             <p>This is a fictitious website created purely for academic purposes. This site was concieved by a human. The content on this site was concieved by a human and created by AI. The images were created by AI and curated, edited, reviewed, verified, and augmented by a human, although AI is a much better typist than I</p>
         </footer>
 
-    <script>
-      function addToCart(itemId) {
-        console.log("Item added to cart:", itemId);
-      }
+<script>
+  const modal = document.querySelector('.modal');
+  const modalImg = document.getElementById('modal-img');
+  const modalCaption = document.getElementById('modal-caption');
+  const closeBtn = document.querySelector('.modal .close');
 
-      function checkout() {
-        alert("Checkout functionality coming soon!");
-      }
+  document.querySelectorAll('.shop-item img').forEach(img => {
+    img.addEventListener('click', () => {
+      modalImg.src = img.src;
+      modalImg.alt = img.alt;
+      modalCaption.textContent = img.dataset.caption || img.alt;
+      modal.removeAttribute('hidden');
+    });
+  });
 
-      function openModal(imgElement) {
-        const modal = document.getElementById("modal");
-        const modalImg = document.getElementById("modal-img");
-        const caption = document.getElementById("modal-caption");
+  function closeModal() {
+    modal.setAttribute('hidden', true);
+    modalImg.src = '';
+    modalCaption.textContent = '';
+  }
 
-        modalImg.src = imgElement.src;
-        modalImg.alt = imgElement.alt;
-        caption.textContent = imgElement.title || imgElement.alt;
-        modal.removeAttribute("hidden");
-      }
-
-      function closeModal() {
-        const modal = document.getElementById("modal");
-        modal.setAttribute("hidden", "");
-        document.getElementById("modal-img").src = "";
-        document.getElementById("modal-caption").textContent = "";
-      }
+  closeBtn.addEventListener('click', closeModal);
+</script>
     </script>
   </body>
 </html>
