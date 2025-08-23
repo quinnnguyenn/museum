@@ -14,6 +14,7 @@ footer {
 body {
     background-image: url(../images/museumBackground.png);
     font-family: 'Lucida Sans Unicode';
+    background-color: rgb(242, 227, 232);
 }
 
 button {
