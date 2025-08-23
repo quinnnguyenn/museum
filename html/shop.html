@@ -1,83 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="author" content="Quinn Nguyen">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noindex, nofollow">
-        <link rel="stylesheet" href="../css/shop.css">
-        <title>Museum of Fashion</title>
-    </head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Quinn Nguyen" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="stylesheet" href="../css/shop.css" />
+    <title>Museum of Fashion</title>
+  </head>
 
-    <body>
-        <header>
-            <h1>Museum of Fashion</h1>
-            <button onclick="location.href='../index.html'">Home</button>
-            <button onclick="location.href='staff.html'">Staff</button>
-            <button onclick="location.href='collections.html'">Collections</button>
-        </header>
+  <body>
+    <header>
+      <h1>Museum of Fashion</h1>
+      <nav>
+        <button onclick="location.href='../index.html'">Home</button>
+        <button onclick="location.href='staff.html'">Staff</button>
+        <button onclick="location.href='collections.html'">Collections</button>
+        <button onclick="location.href='shop.html'">Shop</button>
+      </nav>
+    </header>
 
-        <main role="main">
-        <div class="shop-grid" role="list">
-            <div class="shop-item" role="listitem">
-            <img src="../images/collections/artifact2.png" alt="Victorian Mourning Brooch" />
-            <h1>Victorian Mourning Brooch</h1>
-            <p>
-                A replica brooch inspired by 19th-century mourning jewelry, featuring a printed hair motif under clear resin and a gold-tone frame with enamel-style accents. A sentimental keepsake that evokes Victorian elegance without the antique price tag.
-            </p>
-            <p class="price">$22.00</p>
-            <button>Add Victorian Mourning Brooch to Cart</button>
-            </div>
-
-            <div class="shop-item" role="listitem">
-            <img src="../images/collections/artifact4.png" alt="Carnival Mask of Recife" />
-            <h1>Carnival Mask of Recife</h1>
-            <p>
-                A lightweight mask made from molded paper and painted in bright acrylics, echoing the festive spirit of Recife’s Carnival. Adorned with mini feathers and glitter, it’s perfect for wall décor or party wear.
-            </p>
-            <p class="price">$18.00</p>
-            <button>Add Carnival Mask of Recife to Cart</button>
-            </div>
-
-            <div class="shop-item" role="listitem">
-            <img src="../images/collections/item7.png" alt="Tuareg Veil Pendant" />
-            <h1>Tuareg Veil Pendant</h1>
-            <p>
-                A simplified version of the traditional Tuareg pendant, featuring a cast metal frame with etched patterns and a faux ebony center. Strung on a soft leatherette cord, it’s a wearable tribute to desert craftsmanship.
-            </p>
-            <p class="price">$24.00</p>
-            <button>Add Tuareg Veil Pendant to Cart</button>
-            </div>
-
-            <div class="shop-item" role="listitem">
-            <img src="../images/collections/item6.png" alt="Qashqai Tribal Earrings" />
-            <h1>Qashqai Tribal Earrings</h1>
-            <p>
-                Copper-tone earrings with stamped spiral designs, inspired by Qashqai nomadic jewelry. Lightweight and easy to wear, they offer a touch of tribal flair in an everyday-friendly format.
-            </p>
-            <p class="price">$16.00</p>
-            <button>Add Qashqai Tribal Earrings to Cart</button>
-            </div>
+    <main role="main">
+      <div class="shop-grid" role="list">
+        <div class="shop-item" role="listitem" data-id="item001">
+          <img src="../images/collections/artifact2.png" alt="Victorian Mourning Brooch" title="Elegance in grief — a replica of Victorian sentimentality." onclick="openModal(this)" />
+          <h1>Victorian Mourning Brooch</h1>
+          <p>A replica brooch inspired by 19th-century mourning jewelry, featuring a printed hair motif under clear resin and a gold-tone frame with enamel-style accents. From the Victorian collection (Material: Resin, Location: England, Purpose: Mourning keepsake).</p>
+          <p class="price">$22.00</p>
+          <button onclick="addToCart('item001')">Add Victorian Mourning Brooch to Cart</button>
         </div>
 
-        <aside id="cart" aria-label="Shopping cart" hidden>
-            <h2>Your Cart</h2>
-            <ul id="cart-items"></ul>
-            <button onclick="checkout()">Proceed to Checkout</button>
-        </aside>
-        </main>
+        <div class="shop-item" role="listitem" data-id="item002">
+          <img src="../images/collections/artifact4.png" alt="Carnival Mask of Recife" title="Dance with the colors of Recife’s Carnival." onclick="openModal(this)" />
+          <h1>Carnival Mask of Recife</h1>
+          <p>A lightweight mask made from molded paper and painted in bright acrylics, echoing the festive spirit of Recife’s Carnival. From the Brazilian collection (Material: Paper, Location: Brazil, Purpose: Festival wear).</p>
+          <p class="price">$18.00</p>
+          <button onclick="addToCart('item002')">Add Carnival Mask of Recife to Cart</button>
+        </div>
 
-        <footer role="contentinfo">
-        <p>
-            This is a fictitious website created purely for academic purposes. This site was conceived by a human. The content on this site was conceived by a human and created by AI. The images were created by AI and curated, edited, reviewed, verified, and augmented by a human, although AI is a much better typist than I.
-        </p>
-        </footer>
+        <div class="shop-item" role="listitem" data-id="item003">
+          <img src="../images/collections/item7.png" alt="Tuareg Veil Pendant" title="Crafted in the spirit of desert nomads." onclick="openModal(this)" />
+          <h1>Tuareg Veil Pendant</h1>
+          <p>A simplified version of the traditional Tuareg pendant, featuring a cast metal frame with etched patterns and a faux ebony center. From the North African collection (Material: Metal, Location: Sahara, Purpose: Veil ornament).</p>
+          <p class="price">$24.00</p>
+          <button onclick="addToCart('item003')">Add Tuareg Veil Pendant to Cart</button>
+        </div>
 
-        <script src="../js/shop.js"></script>
-        <script>
-        function checkout() {
-            alert("Checkout functionality coming soon!");
-        }
-        </script>
-    </body>
-    </html>
+        <div class="shop-item" role="listitem" data-id="item004">
+          <img src="../images/collections/item6.png" alt="Qashqai Tribal Earrings" title="Spirals of tradition from the Qashqai nomads." onclick="openModal(this)" />
+          <h1>Qashqai Tribal Earrings</h1>
+          <p>Copper-tone earrings with stamped spiral designs, inspired by Qashqai nomadic jewelry. From the Persian collection (Material: Copper, Location: Iran, Purpose: Adornment).</p>
+          <p class="price">$16.00</p>
+          <button onclick="addToCart('item004')">Add Qashqai Tribal Earrings to Cart</button>
+        </div>
+      </div>
+
+      <aside id="cart" aria-label="Shopping cart" hidden>
+        <h2>Your Cart</h2>
+        <ul id="cart-items"></ul>
+        <button onclick="checkout()">Proceed to Checkout</button>
+      </aside>
+
+      <div id="modal" class="modal" hidden>
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="modal-img" src="" alt="" />
+        <p id="modal-caption"></p>
+      </div>
+    </main>
+
+    <footer role="contentinfo">
+      <p>This is a fictitious website created purely for academic purposes. This site was conceived by a human. The content on this site was conceived by a human and created by AI. The images were created by AI and curated, edited, reviewed, verified, and augmented by a human, although AI is a much better typist than I.</p>
+    </footer>
+
+    <script src="../js/shop.js"></script>
+    <script>
+      function addToCart(itemId) {
+        console.log("Item added to cart:", itemId);
+      }
+
+      function checkout() {
+        alert("Checkout functionality coming soon!");
+      }
+
+      function openModal(imgElement) {
+        const modal = document.getElementById("modal");
+        const modalImg = document.getElementById("modal-img");
+        const caption = document.getElementById("modal-caption");
+
+        modalImg.src = imgElement.src;
+        modalImg.alt = imgElement.alt;
+        caption.textContent = imgElement.alt;
+        modal.hidden = false;
+      }
+
+      function closeModal() {
+        document.getElementById("modal").hidden = true;
+      }
+    </script>
+  </body>
+</html>
