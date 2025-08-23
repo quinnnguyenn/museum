@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF">
+    <meta charset="UTF-8">
     <meta name="author" content="Quinn Nguyen">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
@@ -16,40 +16,73 @@
       <button onclick="location.href='staff.html'">Staff</button>
       <button onclick="location.href='collections.html'">Collections</button>
       <button onclick="location.href='shop.html'">Shop</button>
+      <button onclick="location.href='cart.html'" id="viewCartBtn">View Cart</button>   
     </header>
 
     <main>
       <div class="shop-grid" role="list">
-        <div class="shop-item" role="listitem" data-id="item001">
+        <div class="souvenir-item" role="listitem" data-id="item001">
           <img src="../images/collections/artifact2.png" alt="Victorian Mourning Brooch" title="Elegance in grief — a replica of Victorian sentimentality." onclick="openModal(this)">
           <h1>Victorian Mourning Brooch</h1>
           <p>A replica brooch inspired by 19th-century mourning jewelry... (Material: Resin, Location: England, Purpose: Mourning keepsake).</p>
           <p class="price">$22.00</p>
-          <button onclick="addToCart('item001')">Add Victorian Mourning Brooch to Cart</button>
+          <button
+            onclick="addToCart(this)"
+            data-id="item001"
+            data-name="Victorian Mourning Brooch"
+            data-price="22.00"
+            data-image="../images/collections/artifact2.png">
+            Add Victorian Mourning Brooch to Cart
+          </button>
+          <span class="qty-badge" aria-live="polite"></span>
         </div>
 
-        <div class="shop-item" role="listitem" data-id="item002">
+        <div class="souvenir-item" role="listitem" data-id="item002">
           <img src="../images/collections/artifact4.png" alt="Carnival Mask of Recife" title="Dance with the colors of Recife’s Carnival." onclick="openModal(this)">
           <h1>Carnival Mask of Recife</h1>
           <p>A lightweight mask made from molded paper... (Material: Paper, Location: Brazil, Purpose: Festival wear).</p>
           <p class="price">$18.00</p>
-          <button onclick="addToCart('item002')">Add Carnival Mask of Recife to Cart</button>
+          <button
+            onclick="addToCart(this)"
+            data-id="item002"
+            data-name="Carnival Mask of Recife"
+            data-price="18.00"
+            data-image="../images/collections/artifact4.png">
+            Add Carnival Mask of Recife to Cart
+          </button>
+          <span class="qty-badge" aria-live="polite"></span>
         </div>
 
-        <div class="shop-item" role="listitem" data-id="item003">
+        <div class="souvenir-item" role="listitem" data-id="item003">
           <img src="../images/collections/artifact7.png" alt="Tuareg Veil Pendant" title="Crafted in the spirit of desert nomads." onclick="openModal(this)">
           <h1>Tuareg Veil Pendant</h1>
           <p>A simplified version of the traditional Tuareg pendant... (Material: Metal, Location: Sahara, Purpose: Veil ornament).</p>
           <p class="price">$24.00</p>
-          <button onclick="addToCart('item003')">Add Tuareg Veil Pendant to Cart</button>
+          <button
+            onclick="addToCart(this)"
+            data-id="item003"
+            data-name="Tuareg Veil Pendant"
+            data-price="24.00"
+            data-image="../images/collections/artifact7.png">
+            Add Tuareg Veil Pendant to Cart
+          </button>
+          <span class="qty-badge" aria-live="polite"></span>
         </div>
 
-        <div class="shop-item" role="listitem" data-id="item004">
+        <div class="souvenir-item" role="listitem" data-id="item004">
           <img src="../images/collections/artifact6.png" alt="Qashqai Tribal Earrings" title="Spirals of tradition from the Qashqai nomads." onclick="openModal(this)">
           <h1>Qashqai Tribal Earrings</h1>
           <p>Copper-tone earrings with stamped spiral designs... (Material: Copper, Location: Iran, Purpose: Adornment).</p>
           <p class="price">$16.00</p>
-          <button onclick="addToCart('item004')">Add Qashqai Tribal Earrings to Cart</button>
+          <button
+            onclick="addToCart(this)"
+            data-id="item004"
+            data-name="Qashqai Tribal Earrings"
+            data-price="16.00"
+            data-image="../images/collections/artifact6.png">
+            Add Qashqai Tribal Earrings to Cart
+          </button>
+          <span class="qty-badge" aria-live="polite"></span>
         </div>
       </div>
 
@@ -72,33 +105,63 @@
 
     <script>
     window.addEventListener('DOMContentLoaded', () => {
-        const modal = document.querySelector('.modal');
-        const modalImg = document.getElementById('modal-img');
-        const modalCaption = document.getElementById('modal-caption');
-        const closeBtn = document.querySelector('.modal .close');
+      const modal = document.querySelector('.modal');
+      const modalImg = document.getElementById('modal-img');
+      const modalCaption = document.getElementById('modal-caption');
+      const closeBtn = document.querySelector('.modal .close');
 
-        function openModal(img) {
+      function openModal(img) {
         modalImg.src = img.src;
         modalImg.alt = img.alt;
         modalCaption.textContent = img.title || img.alt;
         modal.removeAttribute('hidden');
-        }
+      }
 
-        function closeModal() {
+      function closeModal() {
         modal.setAttribute('hidden', true);
         modalImg.src = '';
         modalCaption.textContent = '';
+      }
+
+      const CART_KEY = 'museumCartV1';
+
+      function readCart() {
+        try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+        catch { return []; }
+      }
+
+      function writeCart(cart) {
+        localStorage.setItem(CART_KEY, JSON.stringify(cart));
+      }
+
+      function addToCart(btn) {
+        const id = btn.dataset.id;
+        const name = btn.dataset.name;
+        const unitPrice = Number(btn.dataset.price);
+        const image = btn.dataset.image;
+
+        let cart = readCart();
+        const idx = cart.findIndex(it => it.id === id);
+        if (idx >= 0) {
+          cart[idx].qty += 1;
+        } else {
+          cart.push({ id, name, unitPrice, qty: 1, image });
         }
+        writeCart(cart);
 
-        closeBtn.addEventListener('click', closeModal);
-
-        function addToCart(itemId) {
-        alert(`Added ${itemId} to cart`);
+        const card = btn.closest('.souvenir-item');
+        if (card) {
+          const badge = card.querySelector('.qty-badge');
+          if (badge) {
+            const item = cart.find(it => it.id === id);
+            badge.textContent = item ? `Qty: ${item.qty}` : '';
+          }
         }
+      }
 
-        window.openModal = openModal;
-        window.addToCart = addToCart;
-        window.closeModal = closeModal;
+      window.openModal = openModal;
+      window.closeModal = closeModal;
+      window.addToCart = addToCart;
     });
     </script>
   </body>
